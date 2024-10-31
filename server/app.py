@@ -1,7 +1,7 @@
 from flask import Flask, request, make_response, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate
-from datetime import datetime
+from datetime import datetime, timezone
 
 from models import db, Message
 
@@ -55,7 +55,7 @@ def update_messages_by_id(id):
     # for attr in message:
     #     setattr(message, attr, request.form.get(attr))
     # db.session.add(message)
-    message.updated_at = datetime.utcnow()
+    message.updated_at = datetime.now(timezone.utc)
 
     try:
         db.session.commit()
